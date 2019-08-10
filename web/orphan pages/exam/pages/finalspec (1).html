@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>jQuery Add / Remove Table Rows</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <link rel="icon" href="favicon.ico" type="image/x-icon" />
+        <!-- END META SECTION -->
+
+        <script type="text/javascript" src="../../../js/plugins/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/plugins/jquery/jquery.min.js"></script>
+
+        <style type="text/css">
+            .entry:not(:first-of-type)
+            {
+                margin-top: 10px;
+            }
+
+            .glyphicon
+            {
+                font-size: 12px;
+            }
+
+            td {
+                padding:5px;
+            }
+
+            body {
+                padding:10px;   
+            }
+
+            th {
+                text-align: center;
+            }
+
+            .container{
+                margin-top:20px;
+            }
+            .image-preview-input {
+                position: relative;
+                overflow: hidden;
+                margin: 0px;    
+                color: #333;
+                background-color: #fff;
+                border-color: #ccc;    
+            }
+            .image-preview-input input[type=file] {
+                position: absolute;
+                top: 0;
+                right: 0;
+                margin: 0;
+                padding: 0;
+                font-size: 20px;
+                cursor: pointer;
+                opacity: 0;
+                filter: alpha(opacity=0);
+            }
+            .image-preview-input-title {
+                margin-left:2px;
+            }  
+
+            table{
+                width: 100%;
+                margin: 20px 0;
+                border-collapse: collapse;
+            }
+            table, th, td{
+                border: 1px solid #cdcdcd;
+            }
+            table th, table td{
+                padding: 5px;
+                text-align: left;
+            }
+        </style>
+        <script type="text/javascript">
+            var sum;
+            var ab;
+            $(document).ready(function () {
+                $(".add-row").click(function () {
+                    var max_unit_marks = $("#max_unit_marks").val();
+                    max_unit_marks = parseInt(max_unit_marks);
+                    var unit = $("#unit").val();
+                    var name1 = $("#name1").val();
+                    var email2 = $("#email2").val();
+                    var val3 = $("#val3").val();
+                    var ss4 = $("#ss4").val();
+
+
+                    sum = parseInt($('#name1').val() * 1) + parseInt($('#email2').val() * 2) + parseInt($('#val3').val() * 4) + parseInt($('#ss4').val() * 8);
+
+                    if (sum <= max_unit_marks)
+                    {
+                        var markup = "<tr><td><input type='checkbox' name='record'></td><td><input type='text' name='unit_no' value=' " + unit + "'></td><td><input type='text' name='mk1' value='" + name1 + "'></td><td><input type='text' name='mk2' value='" + email2 + "'></td><td><input type='text' name='mk4' value='" + val3 + "'></td><td><input type='text' name='mk8' value='" + ss4 + "'></td><td  class='subtot'>" + sum + "</td></tr>";
+
+                        $("table tbody").append(markup);
+                        //new
+                    } else {
+                        alert("the marks for unit exceeds the max limit please enter again");
+                    }
+
+                });
+
+                $(".totalofall").click(function () {
+                    var sum1 = 0;
+
+
+
+                    // iterate through each td based on class and add the values
+                    $(".use").each(function () {
+
+                        var value = $(this).text();
+                        // add only if the value is number
+                        if (!isNull(value) && value.length != 0) {
+                            sum += parseFloat(value);
+                        }
+                        //alert(sum);
+                    });
+
+                    /*function sum1(){
+                     sum = parseInt(ab) + parseInt(sum);
+                     var textbox3 = document.getElementById('grand');
+                     textbox3.value=sum;
+                     } */
+
+                });
+                // Find and remove selected table rows
+                $(".delete-row").click(function () {
+                    $("table tbody").find('input[name="record"]').each(function () {
+                        if ($(this).is(":checked")) {
+                            $(this).parents("tr").remove();
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            function setValue() {
+
+                var finalSum = 0;
+                $(".subtot").each(function () {
+                    var unitSum = Number($(this).text());
+                    //alert(prodprice);
+                    finalSum = finalSum + unitSum;
+                });
+                if (finalSum > 0 && finalSum <= 80)
+                    document.getElementById('total').value = finalSum;
+                else
+                    alert("sum should not exceed  80");
+
+            }
+        </script>
+
+    </head> 
+    <body>
+
+        <div class="page-container">
+
+            <!-- START PAGE SIDEBAR -->
+            <div class="page-sidebar">
+                <!-- START X-NAVIGATION -->
+                <ul class="x-navigation">
+                    <li class="xn-logo">
+                        <a href="index.html">Admin</a>
+                        <a href="#" class="x-navigation-control"></a>
+                    </li>
+                    <li class="xn-profile">
+                        <a href="#" class="profile-mini">
+                            <img src="C:\Users\Dell\Desktop\register.jpg" alt="John Doe"/>
+                        </a>
+                        <div class="profile">
+                            <div class="profile-image">
+                                <img src="C:\Users\Dell\Desktop\register.jpg" alt="John Doe"/>
+                            </div>
+                            <div class="profile-data">
+                                <div class="profile-data-name">ADMIN</div>
+                                <div class="profile-data-title">Web Developer/Designer</div>
+                            </div>
+                            <div class="profile-controls">
+                                <a href="pages-profile.html" class="profile-control-left"><span class="fa fa-info"></span></a>
+                                <a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>
+                            </div>
+                        </div>                                                                        
+                    </li>
+
+                    <li class="xn-openable">
+                        <a href="index.html"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>                        
+                    </li>                    
+
+
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-pencil"></span> <span class="xn-text">Student</span></a>
+                        <ul>
+                            <li>
+
+
+                                <a href="AddStudent.html"><span class="fa fa-table"></span> ADD/ UPDATE/ DELETE Student</a></li>
+
+                            <li><a href="form-validation1.html"><span class="fa fa-list-alt"></span>Edit Student Password</a></li>
+                            <li><a href="ViewStudent.html"><span class="fa fa-arrow-right"></span>View Student</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="tables.html"><span class="fa fa-table"></span> <span class="xn-text">Subject</span></a>
+                        <ul>                            
+                            <li><a href="AddSubject.html"><span class="fa fa-align-justify"></span> ADD/Update/Delete Subject</a></li>
+                            <li><a href="ViewSubject.html"><span class="fa fa-sort-alpha-desc"></span> View Subjects</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="tables.html"><span class="fa fa-table"></span> <span class="xn-text"> Set/Schedule Exam</span></a>
+                        <ul>                            
+                            <!--<li><a href="AddExam.html"><span class="fa fa-align-justify"></span>Add Exam</a></li>
+                            <li><a href="ViewExam.html"><span class="fa fa-sort-alpha-desc"></span>View Exam</a></li>
+                            <li><a href="ViewExam.html"><span class="fa fa-sort-alpha-desc"></span>PT/Final Exam</a></li>
+                            <li><a href="table-export.html"><span class="fa fa-download"></span>Export Exam</a></li>   
+                                 <li><a href="ExamSchedule.html"><span class="fa fa-edit"></span> Exam Schedule</a></li>-->                         
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="tables.html"><span class="fa fa-table"></span> <span class="xn-text">Question Bank</span></a>
+                        <ul>                            
+                            <li><a href="AddNewQuestion1.html"><span class="fa fa-align-justify"></span> ADD/Update/Delete Questions</a></li>
+                            <li><a href="ViewQuestionBank1.html"><span class="fa fa-sort-alpha-desc"></span> View Questions</a></li>
+                            <li><a href="ExportQuestion.html"><span class="fa fa-download"></span>Import Question bank</a></li>                            
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Result</span></a>
+                        <ul>
+                            <li><a href="ViewResult.html"><span class="fa fa-image"></span>View Result</a></li>
+
+
+                            <li><a href="ExportResult.html"><span class="fa fa-download"></span> Export Result</a></li>                     
+                        </ul>
+                    </li>
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-bar-chart-o"></span> <span class="xn-text">Statistics & Connections</span></a>
+                        <ul>
+
+                            <li><a href="Analysis.html"><span class="fa fa-bar-chart-o"></span> <span class="xn-text"></span>Analysis/Stats</a></li>
+                            <li><a href="Connections.html"><span class="fa fa-user"></span>Connections</a></li>
+
+
+                        </ul>
+                    </li>             
+
+
+
+                    <li class="xn-openable">
+                        <a href="#"><span class="fa fa-cogs"></span> <span class="xn-text">Settings</span></a>                        
+                        <ul>
+                            <li><a href="pages-profile.html"><span class="fa fa-user"></span>Admin Profile</a></li>
+                            <li><a href="pages-profile.html"><span class="fa fa-user"></span>Change Admin Profile</a></li>
+                            <li><a href="ui-widgets.html"><span class="fa fa-heart"></span> Widgets</a></li>   
+
+                            <li><a href="pages-calendar.html"><span class="fa fa-calendar"></span> Calendar</a></li>                         
+                            <li><a href="ui-panels.html"><span class="fa fa-pencil-square-o"></span> Panels</a></li>
+
+
+
+                            <li><a href="ui-sliders.html"><span class="fa fa-arrows-h"></span> Sliders</a></li>
+
+
+                        </ul>
+                    </li>               
+
+
+                </ul>
+                <!-- END X-NAVIGATION -->
+            </div>
+            <!-- END PAGE SIDEBAR -->                        
+            <!-- PAGE CONTENT -->
+            <div class="page-content">
+
+                <!-- START X-NAVIGATION VERTICAL -->
+                <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+                    <!-- TOGGLE NAVIGATION -->
+                    <li class="xn-icon-button">
+                        <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
+                    </li>
+                    <!-- END TOGGLE NAVIGATION -->
+                    <!-- SEARCH -->
+                    <li class="xn-search">
+                        <form role="form">
+                            <input type="text" name="search" placeholder="Search..."/>
+                        </form>
+                    </li>   
+                    <!-- END SEARCH -->
+                    <!-- SIGN OUT -->
+                    <li class="xn-icon-button pull-right">
+                        <a href="#" class="mb-control" data-box="#mb-signout"><span class="fa fa-sign-out"></span></a>                        
+                    </li> 
+                    <!-- END SIGN OUT -->
+                    <!-- MESSAGES -->
+
+                    <!-- END MESSAGES -->
+                    <!-- TASKS -->
+
+                    <!-- END TASKS -->
+                </ul>
+                <!-- END X-NAVIGATION VERTICAL -->                     
+
+                <!-- START BREADCRUMB -->
+                <ul class="breadcrumb">
+                    <li><a href="#">Home</a></li>                    
+                    <li><a href="#">Set/Schedule Exam </a></li>
+                    <li class="active">Specification table.</li>
+                </ul>
+                <!-- END BREADCRUMB -->
+
+                <!-- PAGE TITLE -->
+                <div class="page-title">                    
+                    <h2>Specification Table</h2>
+                </div>
+                <!-- END PAGE TITLE -->                
+
+                <!-- PAGE CONTENT WRAPPER -->
+                <div class="page-content-wrap">                
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">  
+                                <!-- image-preview-filename input [CUT FROM HERE]-->
+                                <!-- /input-group image-preview [TO HERE]--> 
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <form name="myform" action="../controller/exam/AddSpecification.jsp">
+
+                        <input type="text" name="spec_id" placeholder="spec id" required>
+                        <input type="text" name="spec_name" placeholder="specname" required>
+                        <input type="text" name="c_code" placeholder="course code" required>
+                        <input type="text" name="branch" placeholder="branch" required>
+
+                        <br>
+                        <br>
+                        <input type="number" id="unit" placeholder="unit no." name="unit_no">
+                        <input type="number" id="name1"   name="mk1" placeholder="1 mark" required>
+                        <input type="number" id="email2" name="mk2" placeholder="2 mark" required>
+                        <input type="number" id="val3" name="mk4" placeholder="4 mark" required>
+                        <input type="number" id="ss4" name="mk8" placeholder="8 mark" required>
+                        <input type="number" name="max_unit_marks" placeholder="max marks per unit" id="max_unit_marks" required>
+                        <input type="button" class="add-row" value="Add Row">
+
+
+                        <table id="mytable">
+                            <thead>
+                                <tr>
+                                    <th>Select to delete</th>
+                                    <th>unit no.</th>
+                                    <th>1 mark</th>
+                                    <th>2 mark</th>
+                                    <th>4 mark</th>
+                                    <th>8 mark</th>
+                                    <th id="use">total of unit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                        <button type="button" class="delete-row">Delete Row</button><br><br><br>
+                        <!--<input type="text" id="grand"><button type="button" class="totalofall" onclick="sum1()">Total</button>-->
+                        <p>
+                            <input type="button" name="set_Value"  id="set_Value" value="Total Sum" onclick="setValue()" />
+                        </p>
+                        <p>
+                            <label>
+                                <input type="text" name="total" placeholder="final sum" readonly id="total"  />
+                            </label>
+
+                        </p>
+
+                        <button class="btn btn-primary pull-right" name="delete_btn">Save Changes </button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body> 
+</html>

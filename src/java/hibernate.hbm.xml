@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="bean.Admin"  table="admin">
+        <id name="username"/>
+        <property name="password"/>
+    </class>
+    
+
+  
+    <class name="bean.Student"  table="student_operation">
+        <id name="roll_no"/>
+        <property name="student_name"/>
+        <property name="branch"/>
+        <property name="year"/>
+        <property name="dob"/>
+    </class>
+    <class name="bean.ExamResult"  table="ExamResult">
+        <id name="roll_no"/>
+        <property name="student_name"/>
+        <property name="exam_name" />
+        <property name="marks"/>
+    </class>
+  
+    <class name="bean.Question_Bank"  table="question_bank">
+        <id name="q_no"/>
+        <property name="c_code" />
+        <property name="c_name"/>
+        <property name="question"/>
+        <property name="op1"/>
+        <property name="op2"/>
+        <property name="op3"/>
+        <property name="op4"/>
+        <property name="c_ans"/>
+        <property name="user_c_ans"/>
+        <property name="marks"/>
+        <property name="unit_no"/>
+    
+    </class>
+ 
+    <class name="bean.Exam_Question_Bank"  table="exam_question_bank">
+        <id name="id" />
+        <property name="exam_name"/>
+        <property name="roll_no"/>
+        <property name="unit_no"/>
+        <property name="q_no" />
+        <property name="q_id" />
+        <property name="question"/>
+        <property name="op1"/>
+        <property name="op2"/>
+        <property name="op3"/>
+        <property name="op4"/>
+        <property name="c_ans"/>
+        <property name="user_c_ans"/>
+        <property name="marks"/>
+        
+            
+    </class>
+  
+    <class name="bean.Subject"  table="subject">
+        <id name="c_code"/>
+        <property name="c_name" />
+        <property name="branch"/>
+        <property name="year"/>    
+    </class>
+  
+    <class name="bean.Specification"  table="specification">
+        <id name="spec_id"></id>
+        <property name="spec_name" unique-key="a" ></property>
+        <property name="c_code" unique-key="a" ></property>
+        <property name="unit_no" unique-key="a" ></property>
+        <property name="branch" ></property>
+        <property name="mk1" ></property>
+        <property name="mk2" ></property>
+        <property name="mk4" ></property>
+        <property name="mk8" ></property>
+        <property name="total" ></property>                
+    </class> 
+    <class name="bean.Exam"  table="Exam">
+        <id name="ename" />
+        <property name="ccode" />
+        <property name="cname" />
+        <property name="specname" />
+        <property name="etype" />
+        <property name="maxmarks" />
+        <property name="etime" />
+        <property name="branch" />
+        <property name="mquestions" />
+    </class> 
+</hibernate-mapping>
+

@@ -1,0 +1,40 @@
+<html>
+<head>
+<!-- CSS
+		================================================== -->
+		<!-- Fontawesome Icon font -->
+        <link rel="stylesheet" href="css/font-awesome.min.css">
+		<!-- Twitter Bootstrap css -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+		<!-- jquery.fancybox  -->
+        <link rel="stylesheet" href="css/jquery.fancybox.css">
+		<!-- animate -->
+        <link rel="stylesheet" href="css/animate.css">
+		<!-- Main Stylesheet -->
+        <link rel="stylesheet" href="css/main.css">
+		<!-- media-queries -->
+        <link rel="stylesheet" href="css/media-queries.css">
+
+		<!-- Modernizer Script for old Browsers -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+
+<script>
+function validateForm() {
+    var x = document.forms["myForm"]["fname"].value;
+    var y = document.forms["myForm"]["pname"].value;
+    if (x == "admin" && y == "123") {
+        alert("SUCCESSFULL");
+        return false;
+    }
+
+}
+</script>
+</head>
+<body>
+<form name="myForm" action="/action_page_post.php" onsubmit="return validateForm()" method="post">
+Name: <input type="text" name="fname"><br>
+pass: <input type="text" name="pname" required><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
